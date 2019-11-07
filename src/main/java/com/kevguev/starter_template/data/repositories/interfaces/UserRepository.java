@@ -1,4 +1,4 @@
-package com.kevguev.starter_template.data.repositories;
+package com.kevguev.starter_template.data.repositories.interfaces;
 
 import com.kevguev.starter_template.data.models.UserModel;
 import org.springframework.data.mongodb.repository.MongoRepository;

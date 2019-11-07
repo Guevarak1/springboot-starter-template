@@ -1,7 +1,7 @@
 package com.kevguev.starter_template.services;
 
 import com.kevguev.starter_template.data.models.UserModel;
-import com.kevguev.starter_template.data.repositories.UserRepository;
+import com.kevguev.starter_template.data.repositories.interfaces.UserRepository;
 import com.kevguev.starter_template.services.interfaces.UserService;
 import com.kevguev.starter_template.services.models.User;
 import org.springframework.stereotype.Service;
