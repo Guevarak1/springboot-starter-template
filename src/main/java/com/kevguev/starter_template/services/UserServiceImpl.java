@@ -2,7 +2,7 @@ package com.kevguev.starter_template.services;
 
 import com.kevguev.starter_template.data.models.UserModel;
 import com.kevguev.starter_template.data.repositories.interfaces.UserRepository;
-import com.kevguev.starter_template.exceptionHandler.UserNotFoundException;
+import com.kevguev.starter_template.exceptions.UserNotFoundException;
 import com.kevguev.starter_template.services.interfaces.UserService;
 import com.kevguev.starter_template.services.models.User;
 import org.springframework.stereotype.Service;

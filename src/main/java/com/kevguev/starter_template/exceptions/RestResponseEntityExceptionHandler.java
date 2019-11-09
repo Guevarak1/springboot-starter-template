@@ -1,4 +1,4 @@
-package com.kevguev.starter_template.exceptionHandler;
+package com.kevguev.starter_template.exceptions;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;

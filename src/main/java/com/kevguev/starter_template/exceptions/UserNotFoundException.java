@@ -1,4 +1,4 @@
-package com.kevguev.starter_template.exceptionHandler;
+package com.kevguev.starter_template.exceptions;
 
 public class UserNotFoundException extends RuntimeException {
 

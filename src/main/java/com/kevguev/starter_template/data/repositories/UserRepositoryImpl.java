@@ -2,7 +2,7 @@ package com.kevguev.starter_template.data.repositories;
 
 import com.kevguev.starter_template.data.models.UserModel;
 import com.kevguev.starter_template.data.repositories.interfaces.UserRepositoryCustom;
-import com.kevguev.starter_template.exceptionHandler.UserNotFoundException;
+import com.kevguev.starter_template.exceptions.UserNotFoundException;
 import com.kevguev.starter_template.services.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
