@@ -55,7 +55,7 @@ public class UserServiceTests {
 
         List<User> users = userService.retrieveUsers("testLastName");
 
-        assertEquals("testLastName", users.get(0).lastName);
+        assertEquals("testLastName", users.get(0).getLastName());
     }
 
     @Test

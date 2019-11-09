@@ -3,6 +3,7 @@ package com.kevguev.starter_template.controllers;
 import com.kevguev.starter_template.controllers.resources.UserResource;
 import com.kevguev.starter_template.services.interfaces.UserService;
 import com.kevguev.starter_template.services.models.User;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +20,13 @@ public class UserController {
         this.userService = userService;
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<UserResource> getUser(@PathVariable String id) {
+        User user = userService.retrieveUser(id);
+
+        return ResponseEntity.ok(new UserResource(user));
+    }
+
     @GetMapping
     public ResponseEntity<List<UserResource>> getUsers(@RequestParam(required = false) String lastName) {
         List<User> users;
@@ -33,9 +41,16 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity<UserResource> createUser(@RequestBody UserResource userResource) {
-        User user = userService.createUser(new User(userResource.firstName, userResource.lastName));
+        User user = userService.createUser(new User(userResource));
 
-        return ResponseEntity.ok(new UserResource(user));
+        return new ResponseEntity<>(new UserResource(user), HttpStatus.CREATED);
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<UserResource> updateUser(@PathVariable String id, @RequestBody UserResource userResource) {
+        User updatedUser = userService.updateUser(id, new User(userResource));
+
+        return ResponseEntity.ok(new UserResource(updatedUser));
     }
 
     private static List<UserResource> convertToUserResources(List<User> users) {

@@ -7,11 +7,13 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class UserResource {
-    public String firstName;
-    public String lastName;
+    private String id;
+    private String firstName;
+    private String lastName;
 
     public UserResource(User user) {
-        this.firstName = user.firstName;
-        this.lastName = user.lastName;
+        this.id = user.getId();
+        this.firstName = user.getFirstName();
+        this.lastName = user.getLastName();
     }
 }

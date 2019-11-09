@@ -10,9 +10,6 @@ import java.util.List;
     /usr/local/opt/mongodb-community@3.6/bin/mongod
     mongo
  */
-public interface UserRepository extends MongoRepository<UserModel, String> {
-
-    UserModel findByFirstName(String firstName);
-
+public interface UserRepository extends MongoRepository<UserModel, String>, UserRepositoryCustom {
     List<UserModel> findByLastName(String lastName);
 }

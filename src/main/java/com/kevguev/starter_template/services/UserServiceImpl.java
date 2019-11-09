@@ -2,12 +2,14 @@ package com.kevguev.starter_template.services;
 
 import com.kevguev.starter_template.data.models.UserModel;
 import com.kevguev.starter_template.data.repositories.interfaces.UserRepository;
+import com.kevguev.starter_template.exceptionHandler.UserNotFoundException;
 import com.kevguev.starter_template.services.interfaces.UserService;
 import com.kevguev.starter_template.services.models.User;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService{
@@ -17,7 +19,16 @@ public class UserServiceImpl implements UserService{
     public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
-    
+
+    @Override
+    public User retrieveUser(String id) {
+        Optional<UserModel> userModel = userRepository.findById(id);
+        if (!userModel.isPresent())
+            throw new UserNotFoundException("User could not be found with Id: " + id);
+
+        return new User(userModel.get());
+    }
+
     @Override
     public List<User> retrieveUsers() {
         return convertToUsers(userRepository.findAll());
@@ -30,8 +41,13 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User createUser(User user) {
-        UserModel userModel = userRepository.save(new UserModel(user.firstName, user.lastName));
+        UserModel userModel = userRepository.save(new UserModel(user));
         return convertToUser(userModel);
+    }
+
+    @Override
+    public User updateUser(String id, User user) {
+        return userRepository.updateUser(id, user);
     }
 
 
@@ -46,6 +62,6 @@ public class UserServiceImpl implements UserService{
     }
 
     private static User convertToUser(UserModel userModel) {
-        return new User(userModel.firstName, userModel.lastName);
+        return new User(userModel);
     }
 }
