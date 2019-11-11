@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
     private UserRepository userRepository;
 
@@ -42,7 +42,7 @@ public class UserServiceImpl implements UserService{
     @Override
     public User createUser(User user) {
         UserModel userModel = userRepository.save(new UserModel(user));
-        return convertToUser(userModel);
+        return new User(userModel);
     }
 
     @Override
@@ -50,18 +50,21 @@ public class UserServiceImpl implements UserService{
         return userRepository.updateUser(id, user);
     }
 
+    @Override
+    public void deleteUserById(String userId) {
+        if (!userRepository.existsById(userId))
+            throw new UserNotFoundException("User could not be found with Id: " + userId);
+
+        userRepository.deleteById(userId);
+    }
 
     private static List<User> convertToUsers(List<UserModel> userModels) {
         List<User> users = new ArrayList<>();
-        for(UserModel userModel : userModels) {
-            User user = convertToUser(userModel);
+        for (UserModel userModel : userModels) {
+            User user = new User(userModel);
             users.add(user);
         }
 
         return users;
-    }
-
-    private static User convertToUser(UserModel userModel) {
-        return new User(userModel);
     }
 }

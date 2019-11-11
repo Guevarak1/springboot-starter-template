@@ -53,6 +53,12 @@ public class UserController {
         return ResponseEntity.ok(new UserResource(updatedUser));
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity deleteUser(@PathVariable String id) {
+        userService.deleteUserById(id);
+        return ResponseEntity.ok().build();
+    }
+
     private static List<UserResource> convertToUserResources(List<User> users) {
         List<UserResource> userResources = new ArrayList<>();
         for (User user : users) {
