@@ -9,6 +9,7 @@ public class User {
     private String id;
     private String firstName;
     private String lastName;
+    private Address address;
 
     public User(String firstName, String lastName) {
         this.firstName = firstName;
@@ -19,12 +20,13 @@ public class User {
         this.id = userResource.getId();
         this.firstName = userResource.getFirstName();
         this.lastName = userResource.getLastName();
+        this.address = userResource.getAddress() != null ? new Address(userResource.getAddress()) : null;
     }
 
     public User(UserModel userModel) {
         this.id = userModel.getId();
         this.firstName = userModel.getFirstName();
         this.lastName = userModel.getLastName();
-
+        this.address = userModel.getAddress() != null ? new Address(userModel.getAddress()) : null;
     }
 }

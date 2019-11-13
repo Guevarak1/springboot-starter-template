@@ -9,10 +9,11 @@ import org.springframework.data.annotation.Id;
 @NoArgsConstructor
 public class UserModel {
     @Id
-    public String id;
+    private String id;
 
-    public String firstName;
-    public String lastName;
+    private String firstName;
+    private String lastName;
+    private AddressModel address;
 
     public UserModel(String firstName, String lastName) {
         this.firstName = firstName;
@@ -22,5 +23,6 @@ public class UserModel {
     public UserModel(User user) {
         this.firstName = user.getFirstName();
         this.lastName = user.getLastName();
+        this.address =  user.getAddress() != null ? new AddressModel(user.getAddress()) : null;
     }
 }

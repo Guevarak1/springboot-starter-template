@@ -4,6 +4,7 @@ import com.kevguev.starter_template.data.models.UserModel;
 import com.kevguev.starter_template.data.repositories.interfaces.UserRepository;
 import com.kevguev.starter_template.exceptions.UserNotFoundException;
 import com.kevguev.starter_template.services.interfaces.UserService;
+import com.kevguev.starter_template.services.models.Address;
 import com.kevguev.starter_template.services.models.User;
 import org.springframework.stereotype.Service;
 
@@ -48,6 +49,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public User updateUser(String id, User user) {
         return userRepository.updateUser(id, user);
+    }
+
+    @Override
+    public User updateUsersAddress(String id, Address address) {
+        return userRepository.updateUserAddress(id, address);
     }
 
     @Override

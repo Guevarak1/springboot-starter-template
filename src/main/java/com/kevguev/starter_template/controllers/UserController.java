@@ -1,7 +1,9 @@
 package com.kevguev.starter_template.controllers;
 
+import com.kevguev.starter_template.controllers.resources.AddressResource;
 import com.kevguev.starter_template.controllers.resources.UserResource;
 import com.kevguev.starter_template.services.interfaces.UserService;
+import com.kevguev.starter_template.services.models.Address;
 import com.kevguev.starter_template.services.models.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -49,6 +51,13 @@ public class UserController {
     @PatchMapping("/{id}")
     public ResponseEntity<UserResource> updateUser(@PathVariable String id, @RequestBody UserResource userResource) {
         User updatedUser = userService.updateUser(id, new User(userResource));
+
+        return ResponseEntity.ok(new UserResource(updatedUser));
+    }
+
+    @PatchMapping("/{id}/address")
+    public ResponseEntity<UserResource> updateUsersAddress(@PathVariable String id, @RequestBody AddressResource addressResource) {
+        User updatedUser = userService.updateUsersAddress(id, new Address(addressResource));
 
         return ResponseEntity.ok(new UserResource(updatedUser));
     }
