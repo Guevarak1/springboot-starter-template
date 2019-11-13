@@ -20,13 +20,13 @@ public class User {
         this.id = userResource.getId();
         this.firstName = userResource.getFirstName();
         this.lastName = userResource.getLastName();
-        this.address = new Address(userResource.getAddress());
+        this.address = userResource.getAddress() != null ? new Address(userResource.getAddress()) : null;
     }
 
     public User(UserModel userModel) {
         this.id = userModel.getId();
         this.firstName = userModel.getFirstName();
         this.lastName = userModel.getLastName();
-        this.address = new Address(userModel.getAddress());
+        this.address = userModel.getAddress() != null ? new Address(userModel.getAddress()) : null;
     }
 }

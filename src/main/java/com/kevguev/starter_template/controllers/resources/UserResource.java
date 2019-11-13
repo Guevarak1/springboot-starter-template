@@ -16,6 +16,6 @@ public class UserResource {
         this.id = user.getId();
         this.firstName = user.getFirstName();
         this.lastName = user.getLastName();
-        this.address = new AddressResource(user.getAddress());
+        this.address = user.getAddress() != null ? new AddressResource(user.getAddress()) : null;
     }
 }

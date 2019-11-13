@@ -23,6 +23,6 @@ public class UserModel {
     public UserModel(User user) {
         this.firstName = user.getFirstName();
         this.lastName = user.getLastName();
-        this.address = new AddressModel(user.getAddress());
+        this.address =  user.getAddress() != null ? new AddressModel(user.getAddress()) : null;
     }
 }

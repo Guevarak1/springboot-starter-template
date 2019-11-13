@@ -1,8 +1,10 @@
 package com.kevguev.starter_template.data.repositories;
 
+import com.kevguev.starter_template.data.models.AddressModel;
 import com.kevguev.starter_template.data.models.UserModel;
 import com.kevguev.starter_template.data.repositories.interfaces.UserRepositoryCustom;
 import com.kevguev.starter_template.exceptions.UserNotFoundException;
+import com.kevguev.starter_template.services.models.Address;
 import com.kevguev.starter_template.services.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -33,5 +35,18 @@ public class UserRepositoryImpl implements UserRepositoryCustom {
         userModel.setLastName(user.getLastName());
 
         return new User(mongoTemplate.save(userModel));
+    }
+
+    @Override
+    public User updateUserAddress(String id, Address address) {
+        Query findUserByIdQuery = Query.query(Criteria.where("_id").is(id));
+
+        UserModel userModel = mongoTemplate.findOne(findUserByIdQuery, UserModel.class);
+        if (userModel == null)
+            throw new UserNotFoundException("User was not found with Id: " + id);
+
+        userModel.setAddress(new AddressModel(address));
+        return new User(mongoTemplate.save(userModel));
+
     }
 }

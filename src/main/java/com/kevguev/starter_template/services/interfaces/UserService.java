@@ -1,5 +1,6 @@
 package com.kevguev.starter_template.services.interfaces;
 
+import com.kevguev.starter_template.services.models.Address;
 import com.kevguev.starter_template.services.models.User;
 
 import java.util.List;
@@ -15,6 +16,8 @@ public interface UserService {
     User createUser(User user);
 
     User updateUser(String id, User user);
+
+    User updateUsersAddress(String id, Address address);
 
     void deleteUserById(String userId);
 }
